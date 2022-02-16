@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js"></script>
+    <title>Example</title>
+</head>
+<body>
+    <p>Loading</p>
+    <script>
+var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+
+function loadFile(filePath) {
+  var result = null;
+  var xmlhttp = new XHR();
+  xmlhttp.open("GET", filePath, false);
+  xmlhttp.send();
+  if (xmlhttp.status==200) {
+    result = xmlhttp.responseText;
+  }
+  return result;
+}
+
+async function main(){
+    let pyodide = await loadPyodide({
+        indexURL : "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/"
+    });
+    let framework = loadFile("/framework.py")
+    let main = loadFile("/main.py")
+    pyodide.runPython(framework)
+    pyodide.runPython(main)
+}
+
+main();
+    </script>
+</body>
+</html>
