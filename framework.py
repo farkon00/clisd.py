@@ -1,4 +1,10 @@
-from js import document
+from js import document, window
+import pyodide
+
+global _style_elem
+_style_elem = None
+
+styles = []
 
 class Tag:
     """HTML tag object"""
@@ -26,7 +32,40 @@ def ul(*args, **kwargs): return Tag("ul", *args, **kwargs)
 def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
 
-def render_body(dom : Tag, styles=[]):
+def render_page(dom : Tag):
+    global _style_elem
+
     document.body.innerHTML = dom.render()
-    style = "<style>" + "\n".join(styles) + "</style>"
-    document.head.innerHTML += style
+
+    if not _style_elem:
+        _style_elem = document.createElement("style")
+
+    _style_elem.innerHTML = "\n".join(styles)
+    styles[0:] = []
+
+    document.head.appendChild(_style_elem)
+    
+
+def route(route : dict):
+    def route_link(e):
+        try:
+            url = document.URL.split("#")[1]
+        except IndexError:
+            url = "/"
+
+        try:
+            if url:
+                if url[0] == "/":
+                    url = url[1:]
+
+            lvl = route[url.split("/")[0]]
+        except Exception:
+            return render_page(p("Error 404 : Page not found"))
+
+        if isinstance(lvl, dict):
+            route("/".join(url.split("/")[1:]))
+        else:
+            render_page(lvl())
+
+    window.addEventListener("hashchange", pyodide.create_proxy(route_link))
+    route_link(None)
