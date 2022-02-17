@@ -13,14 +13,12 @@
 var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 
 function loadFile(filePath) {
-  var result = null;
-  var xmlhttp = new XHR();
-  xmlhttp.open("GET", filePath, false);
-  xmlhttp.send();
-  if (xmlhttp.status==200) {
-    result = xmlhttp.responseText;
-  }
-  return result;
+    let request = new Request(filePath);
+
+   return fetch(request) 
+   .then(resp => { 
+        return resp.text()
+    });
 }
 
 async function main(){
@@ -29,8 +27,14 @@ async function main(){
     });
     let framework = loadFile("/framework.py")
     let main = loadFile("/main.py")
-    pyodide.runPython(framework)
-    pyodide.runPython(main)
+    framework.then(
+        function(val) {pyodide.runPython(val)}
+    )
+    main.then(
+        function(val) {pyodide.runPython(val)}
+    )
+    //pyodide.runPython(framework)
+    //pyodide.runPython(main)
 }
 
 main();
