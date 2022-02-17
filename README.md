@@ -24,14 +24,14 @@ Done!
 def cute_component():
     styles.append(
     """
-    #react_p {
+    #comp_p {
         font-size : 60px;
     }
     """
     )
 
     return div(
-        p("Component example : ", id="react_p"),
+        p("Component example : ", id="comp_p"),
         img(width="20%", height="20%", src="https://bit.ly/3gXBe1f") # Image of cat
     )
 
