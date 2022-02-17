@@ -21,30 +21,39 @@ Done!
 
 ## Example
 ```
-style = [] # Style is used to add css from components
-
-def cute_component(): # Component 
-    style.append(
+def cute_component():
+    styles.append(
     """
-    #comp_p {
+    #react_p {
         font-size : 60px;
     }
     """
     )
 
     return div(
-        p("Component example : ", id="comp_p"),
+        p("Component example : ", id="react_p"),
         img(width="20%", height="20%", src="https://bit.ly/3gXBe1f") # Image of cat
     )
 
-def main():
-    tag = div(
+def main_page():
+    return div(
             p("Nice start for the framework!", _class="content"),
-            cute_component()
+            cute_component(),
+            a("About", href="#about")
         , _class="container flex nav", id="nav"
     )
 
-    render_body(tag, styles=style) # Renders Tag objects as html
+def about_page():
+    return div(
+        a("Main", href="#"),
+        p("We don`t know who we are")
+    )
+
+def main():
+    route({
+        "about" : about_page,
+        "" : main_page
+    })
 
 main()
 ```
