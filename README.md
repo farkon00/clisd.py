@@ -1,5 +1,5 @@
 # clisd.py
-Clisd is UI framework with client side rendering for python. It uses WASM and [Pyodide framework](https://github.com/pyodide/pyodide) to run python code in clients browser.
+Clisd is UI framework with client side rendering and SPA for python. It uses WASM and [Pyodide framework](https://github.com/pyodide/pyodide) to run python code in clients browser.
 
 In plans this framework will be able to compete with React, Vue.js, Angular etc.
 
