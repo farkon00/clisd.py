@@ -1,5 +1,6 @@
 let pyodide = document.createElement("script");
 pyodide.setAttribute("src", "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js");
+myScript.setAttribute("async", "false");
 
 document.head.insertBefore(pyodide, document.head.firstElementChild);
 
