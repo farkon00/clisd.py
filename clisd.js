@@ -1,3 +1,8 @@
+let pyodide = document.createElement("script");
+pyodide.setAttribute("src", "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js");
+
+document.head.insertBefore(pyodide, document.head.firstElementChild);
+
 function loadFile(filePath) {
     let request = new Request(filePath);
 
