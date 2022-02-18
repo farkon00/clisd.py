@@ -7,7 +7,7 @@ function loadFile(filePath) {
     });
 }
 
-async function runPython(clisd, name) {
+function runPython(clisd, name) {
     let code = loadFile(name);
     code.then(
         function(val) {clisd.runPython(val)}
