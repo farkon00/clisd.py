@@ -15,12 +15,13 @@ class Tag:
         if _class: self.attrs["class"] = _class
 
     def render(self):
-        return \
-f"""
-<{self.name}
-    {' '.join([f'{i}="{j}"' for i, j in self.attrs.items()])}>{''.join([i.render() if isinstance(i, Tag) else i for i in self.content])}
-</{self.name}>
-""".replace("\\n", "")
+        self.element = document.createElement(self.name)
+        for i, j in self.attrs:
+            self.element.setAttribute(str(i), str(j))
+
+        self.element.innerHTML = {''.join([i.render() if isinstance(i, Tag) else i for i in self.content])}
+
+        return self.element.outerHTML
 
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
