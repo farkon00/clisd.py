@@ -5,35 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js"></script>
+    <script src="/template.js"></script>
     <title>Example</title>
 </head>
 <body>
     <p>Loading</p>
-    <script>
-function loadFile(filePath) {
-    let request = new Request(filePath);
-
-   return fetch(request) 
-   .then(resp => { 
-        return resp.text()
-    });
-}
-
-async function main(){
-    let pyodide = await loadPyodide({
-        indexURL : "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/"
-    });
-    let framework = loadFile("/framework.py")
-    let main = loadFile("/main.py")
-    framework.then(
-        function(val) {pyodide.runPython(val)}
-    )
-    main.then(
-        function(val) {pyodide.runPython(val)}
-    )
-}
-
-main();
-    </script>
 </body>
 </html>
