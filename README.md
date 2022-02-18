@@ -11,10 +11,10 @@ Roadmap :
 * Start development of new full-stack framework. Which will use this framework for front-end.
 ---
 # Getting Started
-1. Download template.html and framework.py(in future this will be on CDN).
+1. Download template.html, template.js and framework.py(in future this will be on CDN).
 2. Set up your local server(author uses Live Server for VS Code).
 3. Create main.py or other .py file.
-4. Put your file name into 31 line of template.
+4. Run runPython function as showed in template.js.
 5. Write code in your file.
 
 Done!
