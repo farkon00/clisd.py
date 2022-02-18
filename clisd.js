@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-let pyodide = document.createElement("script");
-pyodide.setAttribute("src", "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js");
-myScript.setAttribute("async", "false");
 
-document.head.insertBefore(pyodide, document.head.firstElementChild);
-
-=======
->>>>>>> parent of 01afa57 (Auto pyodide loading added)
 function loadFile(filePath) {
     let request = new Request(filePath);
 
