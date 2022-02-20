@@ -16,12 +16,16 @@ class Tag:
 
     def render(self):
         self.element = document.createElement(self.name)
-        for i, j in self.attrs:
+        for i, j in self.attrs.items():
             self.element.setAttribute(str(i), str(j))
 
-        self.element.innerHTML = {''.join([i.render() if isinstance(i, Tag) else i for i in self.content])}
+        for i in self.content:
+            if isinstance(i, Tag):
+                self.element.appendChild(i.render())
+            else:
+                self.element.innerHTML += str(i)
 
-        return self.element.outerHTML
+        return self.element
 
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
@@ -36,7 +40,8 @@ def li(*args, **kwargs): return Tag("li", *args, **kwargs)
 def render_page(dom : Tag):
     global _style_elem
 
-    document.body.innerHTML = dom.render()
+    document.body.innerHTML = ""
+    document.body.appendChild(dom.render())
 
     if not _style_elem:
         _style_elem = document.createElement("style")
