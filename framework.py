@@ -27,6 +27,25 @@ class Tag:
 
         return self.element
 
+class State:
+    def __init__(self, component, value, auto_render=False):
+        self.component = component
+        self._value = value
+        self.auto_render = auto_render
+
+    def set(self, value):
+        self.value = value
+        elem = self.element
+        elem.parentNode.replaceChild(self.component.render(), elem)
+        styles[0:] = []
+
+    @property
+    def value(self):
+        return self._value
+    @value.setter
+    def value(self, value):
+        self.set(value)
+
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
 def span(*args, **kwargs): return Tag("span", *args, **kwargs)
