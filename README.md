@@ -31,7 +31,10 @@ def cute_component():
 
     return div(
         p("Component example : ", id="comp_p"),
-        img(width="20%", height="20%", src="https://bit.ly/3gXBe1f") # Image of cat
+        img(width="20%", height="20%", src="https://bit.ly/3gXBe1f"), # Image of cat
+        br(), 
+        Tag("button", "CLICK"),
+        "Counter : ", p("0", id="counter")
     )
 
 def main_page():
@@ -42,10 +45,21 @@ def main_page():
         , _class="container flex nav", id="nav"
     )
 
+class ClassComp(Component):
+    def __init__(self):
+        self.state = State(self, 0)
+    
+    def _render(self):
+        return div(
+            Tag("button", "CLICK", events=(Event("click", lambda x : self.state.set(self.state.value + 1)),)),
+            p(self.state.value)
+        )
+
 def about_page():
     return div(
         a("Main", href="#"),
-        p("We don`t know who we are")
+        p("We don`t know who we are"),
+        ClassComp()
     )
 
 def main():
