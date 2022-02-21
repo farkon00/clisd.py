@@ -1,3 +1,4 @@
+from pydoc import doc
 from js import document, window
 import pyodide
 
@@ -8,18 +9,28 @@ styles = []
 
 class Tag:
     """HTML tag object"""
-    def __init__(self, name : str, *content, _class : str="", **attrs):
+    def __init__(self, name : str, *content, _class : str="", events=None, **attrs):
         self.name = name
         self.content = content
+
+        self.events = events if events else []
+
         self.attrs = attrs
         if _class: self.attrs["class"] = _class
 
-    def render(self):
-        self.element = document.createElement(self.name)
-        for i, j in self.attrs.items():
+    def render(self, tag=None):
+        if not tag:
+            tag = self
+
+        self.element = document.createElement(tag.name)
+
+        for i, j in tag.attrs.items():
             self.element.setAttribute(str(i), str(j))
 
-        for i in self.content:
+        for i in tag.events:
+            self.element.addEventListener(i.event, pyodide.create_proxy(i.action))
+
+        for i in tag.content:
             if isinstance(i, Tag):
                 self.element.appendChild(i.render())
             else:
@@ -27,17 +38,26 @@ class Tag:
 
         return self.element
 
+class Component(Tag):
+    """Class component object"""
+
+    def __init__(self): pass
+
+    def render(self):
+        return super().render(tag=self._render())
+
 class State:
-    def __init__(self, component, value, auto_render=False):
+    def __init__(self, component, value, auto_render=True):
         self.component = component
         self._value = value
         self.auto_render = auto_render
 
     def set(self, value):
-        self.value = value
-        elem = self.element
-        elem.parentNode.replaceChild(self.component.render(), elem)
-        styles[0:] = []
+        self._value = value
+        if self.auto_render:
+            elem = self.component.element
+            elem.parentNode.replaceChild(self.component.render(), elem)
+            styles[0:] = []
 
     @property
     def value(self):
@@ -55,6 +75,11 @@ def br(**kwargs): return Tag("br", "", **kwargs)
 def ul(*args, **kwargs): return Tag("ul", *args, **kwargs)
 def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
+
+class Event:
+    def __init__(self, event, action = lambda e: None):
+        self.event = event
+        self.action = action
 
 def render_page(dom : Tag):
     global _style_elem
