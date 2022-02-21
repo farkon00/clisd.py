@@ -1,6 +1,6 @@
 async function main(){
-    let clisd = init_clisd();
-    clisd.then(function(val) {runPython(val, "/main.py")});
+    let clisd = await init_clisd();
+    runPython(clisd, "/main.py")
 }
 
 main();

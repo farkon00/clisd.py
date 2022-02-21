@@ -97,23 +97,40 @@ def render_page(dom : Tag):
     
 
 def route(route : dict):
-    def route_link(e):
-        try:
-            url = document.URL.split("#")[1]
-        except IndexError:
-            url = "/"
+    def route_link(e, page=None, _route=route):
+        route =_route
+        if page:
+            url = page
+        else:
+            try:
+                url = document.URL.split("#")[1]
+            except IndexError:
+                url = "/"
 
-        try:
-            if url:
-                if url[0] == "/":
-                    url = url[1:]
+        if url:
+            if url[0] == "/" or url[0] == "\\":
+                url = url[1:]
+        if url:
+            if url[-1] == "/" or url[-1] == "\\":
+                url = url[:-1]
+                
+        url_parts = []
+        for i in url.split("/"):
+            if "\\" not in i:
+                url_parts.append(i)
+            else:
+                for j in i.split("\\"):
+                    url_parts.append(j)
 
-            lvl = route[url.split("/")[0]]
-        except Exception:
+        url_parts = url_parts if url_parts else [""]
+
+        lvl = route.get(url_parts[0], None)
+
+        if not lvl and None not in route:
             return render_page(p("Error 404 : Page not found"))
 
         if isinstance(lvl, dict):
-            route("/".join(url.split("/")[1:]))
+            route_link(None, page="/".join(url_parts[1:] if url_parts[1:] else "/"), _route=lvl)
         else:
             render_page(lvl())
 
