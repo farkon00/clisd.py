@@ -18,7 +18,58 @@ Roadmap :
 
 Done!
 
-## Example
+
+# Documentation
+
+# Table of content
+  * [Python](#python)
+    * [Tag](#tag)
+      * [Tag.render](#tagrender)
+    * [Component](#component) 
+      * [Component.render](#componentrender)
+  * [JS](#js)
+ 
+# Python 
+# Types
+  ## Tag
+  HTML tag type. 
+  ---
+  Constructor args :
+  * name : str - name of html tag
+  * *content - tags or text inside of tag
+  * envents : tuple[Event] - events for this tag
+  * \_class : str - classes of tag
+  * \*\*atrs - attributes of tag
+  ---
+  Methods :
+  ### Tag.render
+  `def render (tag=None)`
+  
+  Renders [Tag](#tag) obejct to JS HTMLElement.
+  
+  Argument tag created for DRY and inheritance.
+  ---
+  
+  ## Component
+  Component type. Used for inheritance for custom class components.
+  
+  ---
+  Details :
+  
+  Components must have private method \_render, which returns string or [Tag](#tag).
+  ---
+  
+  Methods :
+  ### Component.render
+  `def render ()`
+  
+  Renders component to screen. 
+  
+  ---
+  
+# JS
+
+# Example
 ```
 def cute_component():
     styles.append(
