@@ -1,4 +1,3 @@
-from pydoc import doc
 from js import document, window
 import pyodide
 
@@ -8,7 +7,7 @@ _style_elem = None
 styles = []
 
 class Tag:
-    """HTML tag object"""
+    """HTML tag clisd.py object"""
     def __init__(self, name : str, *content, _class : str="", events=None, **attrs):
         self.name = name
         self.content = content
@@ -39,7 +38,7 @@ class Tag:
         return self.element
 
 class Component(Tag):
-    """Class component object"""
+    """Clisd.py component object"""
 
     def __init__(self): pass
 
@@ -47,6 +46,7 @@ class Component(Tag):
         return super().render(tag=self._render())
 
 class State:
+    """Dynamic state for clisd.py components"""
     def __init__(self, component, value, auto_render=True):
         self.component = component
         self._value = value
@@ -77,11 +77,13 @@ def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
 
 class Event:
+    """Clisd.py event object"""
     def __init__(self, event, action = lambda e: None):
         self.event = event
         self.action = action
 
 def render_page(dom : Tag):
+    """Renders dom to screen, change styles"""
     global _style_elem
 
     document.body.innerHTML = ""
@@ -97,6 +99,7 @@ def render_page(dom : Tag):
     
 
 def route(route : dict):
+    """Routes links in clisd.py"""
     def route_link(e, page=None, _route=route):
         route =_route
         if page:
@@ -113,7 +116,7 @@ def route(route : dict):
         if url:
             if url[-1] == "/" or url[-1] == "\\":
                 url = url[:-1]
-                
+
         url_parts = []
         for i in url.split("/"):
             if "\\" not in i:

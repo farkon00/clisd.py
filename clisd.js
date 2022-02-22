@@ -8,19 +8,17 @@ function loadFile(filePath) {
     });
 }
 
-function runPython(clisd, name) {
-    let code = loadFile(name);
-    code.then(
-        function(val) {clisd.runPython(val)}
-    );
+async function runPython(clisd, name) {
+    let code = await loadFile(name);
+    await clisd.runPython(code);
 }
 
 async function init_clisd() {
     let pyodide = await loadPyodide({
         indexURL : "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/"
     });
-    
-    runPython(pyodide, "https://cdn.jsdelivr.net/gh/farkon00/clisd.py/framework.py");
+
+    await runPython(pyodide, "/framework.py");
 
     return pyodide;
 }
