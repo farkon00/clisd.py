@@ -31,10 +31,7 @@ def cute_component():
 
     return div(
         p("Component example : ", id="comp_p"),
-        img(width="20%", height="20%", src="https://bit.ly/3gXBe1f"), # Image of cat
-        br(), 
-        Tag("button", "CLICK"),
-        "Counter : ", p("0", id="counter")
+        img(width="20%", height="20%", src="https://bit.ly/3gXBe1f") # Image of cat
     )
 
 def main_page():
@@ -42,7 +39,6 @@ def main_page():
             p("Nice start for the framework!", _class="content"),
             cute_component(),
             a("About", href="#about")
-        , _class="container flex nav", id="nav"
     )
 
 class ClassComp(Component):
