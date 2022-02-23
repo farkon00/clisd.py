@@ -29,6 +29,7 @@ Done!
       * [Component.render](#componentrender)
     * [State](#state)
       * [State.set](#stateset)
+    * [Event](#event)
   * [JS](#js)
     * [init_clisd](#init_clisd)
     * [runPython](#runpython)
@@ -90,6 +91,14 @@ Done!
   `def set (value)`
   
   Sets value of state to `value`. Also can be used by setting State.value manually(`self.my_state.value = 1`).
+  
+  ## Event
+  Data class, which stores all data about event.
+  
+  Constructor arguments :
+  ---
+  * event : str - name of event. [More about events](https://developer.mozilla.org/en-US/docs/Web/Events)
+  * action : function = lambda e: None - function that will be called on event
   
 # JS
 # Functions
