@@ -31,6 +31,7 @@ Done!
       * [State](#state)
         * [State.set](#stateset)
       * [Event](#event)
+        * [Event.apply](#eventaplly)
     * [Functions](#functions)
       * [render_page](#render_page)
       * [route](#route)
@@ -104,6 +105,17 @@ Done!
   ---
   * event : str - name of event. [More about events](https://developer.mozilla.org/en-US/docs/Web/Events)
   * action : function = lambda e: None - function that will be called on event
+
+  Methods :
+  ---
+  ### Event.aplly
+  `def apply (target)`
+  
+  Applies an event for `target`.
+  
+  Arguments :
+  ---
+  * target : JS EventTarget - target, which will be used for addEventListener
   
 # Functions
   ## render_page
