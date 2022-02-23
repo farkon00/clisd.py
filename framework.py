@@ -65,16 +65,36 @@ class State:
     @value.setter
     def value(self, value):
         self.set(value)
+        
 
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
+def pre(*args, **kwargs): return Tag("pre", *args, **kwargs)
 def span(*args, **kwargs): return Tag("span", *args, **kwargs)
 def img(**kwargs): return Tag("img", "", **kwargs)
+def input(**kwargs): return Tag("input", "", **kwargs)
+def button(*args, **kwargs): return Tag("button", *args, **kwargs)
+def textarea(*args, **kwargs): return Tag("textarea", *args, **kwargs)
+def table(*args, **kwargs): return Tag("table", *args, **kwargs)
+def tbody(*args, **kwargs): return Tag("tbody", *args, **kwargs)
+def th(*args, **kwargs): return Tag("th", *args, **kwargs)
+def tr(*args, **kwargs): return Tag("tr", *args, **kwargs)
+def td(*args, **kwargs): return Tag("td", *args, **kwargs)
 def a(*args, **kwargs): return Tag("a", *args, **kwargs)
+def h1(*args, **kwargs): return Tag("h1", *args, **kwargs)
+def h2(*args, **kwargs): return Tag("h2", *args, **kwargs)
+def h3(*args, **kwargs): return Tag("h3", *args, **kwargs)
+def h4(*args, **kwargs): return Tag("h4", *args, **kwargs)
+def h5(*args, **kwargs): return Tag("h5", *args, **kwargs)
+def h6(*args, **kwargs): return Tag("h6", *args, **kwargs)
+def strong (*args, **kwargs): return Tag("strong", *args, **kwargs)
+def em(*args, **kwargs): return Tag("em", *args, **kwargs)
+def i(*args, **kwargs): return Tag("i", *args, **kwargs)
 def br(**kwargs): return Tag("br", "", **kwargs)
 def ul(*args, **kwargs): return Tag("ul", *args, **kwargs)
 def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
+
 
 class Event:
     """Clisd.py event object"""
