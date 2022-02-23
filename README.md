@@ -4,10 +4,10 @@ Clisd is UI framework with client side rendering and SPA for python. It uses WAS
 In plans this framework will be able to compete with React, Vue.js, Angular etc.
 
 Roadmap : 
-* Develop good base for framework.
-* Add more control of the page and interactive pages to framework.
-* Add integration with Django for easy development for front and back end.
-* Start development of new full-stack framework. Which will use this framework for front-end.
+* [x] Develop good base for framework.
+* [ ] Add more control of the page and interactive pages to framework.(WIP)
+* [ ] integration with Django for easy development for front and back end.
+* [ ] development of new full-stack framework. Which will use this framework for front-end.
 ---
 # Getting Started
 1. Create html file and load script from CDN https://cdn.jsdelivr.net/gh/farkon00/clisd.py/clisd.js
