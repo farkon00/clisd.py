@@ -27,7 +27,7 @@ class Tag:
             self.element.setAttribute(str(i), str(j))
 
         for i in tag.events:
-            self.element.addEventListener(i.event, pyodide.create_proxy(i.action))
+            i.apply(self.element)
 
         for i in tag.content:
             if isinstance(i, Tag):
@@ -65,7 +65,7 @@ class State:
     @value.setter
     def value(self, value):
         self.set(value)
-        
+
 
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
@@ -101,6 +101,9 @@ class Event:
     def __init__(self, event, action = lambda e: None):
         self.event = event
         self.action = action
+
+    def apply(self, target):
+        target.addEventListener(self.event, pyodide.create_proxy(self.action))
 
 def render_page(dom : Tag):
     """Renders dom to screen, change styles"""
