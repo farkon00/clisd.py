@@ -23,13 +23,18 @@ Done!
 
 # Table of content
   * [Python](#python)
-    * [Tag](#tag)
-      * [Tag.render](#tagrender)
-    * [Component](#component) 
-      * [Component.render](#componentrender)
-    * [State](#state)
-      * [State.set](#stateset)
-    * [Event](#event)
+    * [Types](#types)
+      * [Tag](#tag)
+        * [Tag.render](#tagrender)
+      * [Component](#component) 
+        * [Component.render](#componentrender)
+      * [State](#state)
+        * [State.set](#stateset)
+      * [Event](#event)
+    * [Functions](#functions)
+      * [render_page](#render_page)
+      * [route](#route)
+    
   * [JS](#js)
     * [init_clisd](#init_clisd)
     * [runPython](#runpython)
@@ -58,7 +63,7 @@ Done!
   
   
   ## Component
-  Component type. Used for inheritance for custom class components.
+  Component type. Used for inheritance for custom class components. Inherited from [Tag](#tag).
 
   Details :
   ---
@@ -70,7 +75,7 @@ Done!
   ### Component.render
   `def render ()`
   
-  Renders component to screen. 
+  Renders component to screen.
   
   ## State
   Dynamic state for class components type.
@@ -99,6 +104,49 @@ Done!
   ---
   * event : str - name of event. [More about events](https://developer.mozilla.org/en-US/docs/Web/Events)
   * action : function = lambda e: None - function that will be called on event
+  
+# Functions
+  ## render_page
+  `def render_page(dom : Tag)`
+  
+  Renders `dom` to screen, displays CSS.
+  
+  Arguments :
+  ---
+  * dom : Tag - tag that will be displayed to screen
+
+  ## route
+  `def route(route : dict)`
+  
+  Routes link in `route` dictionary. Automatically calls [render_page](#render_page), when link changes. 
+  
+  Route looks that way :
+  ```
+  {
+    '' : main,
+    'test' : {
+      '' : test,
+      'about' : about
+    }
+  }
+  ```
+  Where main, test and about is function components, that return Tag object. 
+  
+  Links will look like that :
+  ```
+  website.com : main,
+  website.com#/test : test,
+  website.com#/test/about : about
+  ```
+  
+  Details :
+  ---
+  Clisd.py uses hashes for routing. This is needed for creation of SPA. So in html anchor links must be used to work.
+  
+  Arguments :
+  ---
+  * route : dict - dictionary of links and function components for that. **Carefully read description of function for structure of dictionary**
+  
   
 # JS
 # Functions
