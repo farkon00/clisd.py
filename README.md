@@ -28,46 +28,66 @@ Done!
     * [Component](#component) 
       * [Component.render](#componentrender)
   * [JS](#js)
+    * [init_clisd](#init_clisd)
+    * [runPython](#runpython)
  
 # Python 
 # Types
   ## Tag
   HTML tag type. 
-  ---
+  
   Constructor args :
+  ---
   * name : str - name of html tag
   * *content - tags or text inside of tag
   * envents : tuple[Event] - events for this tag
   * \_class : str - classes of tag
   * \*\*atrs - attributes of tag
-  ---
+  
   Methods :
+  ---
   ### Tag.render
   `def render (tag=None)`
   
   Renders [Tag](#tag) obejct to JS HTMLElement.
   
   Argument tag created for DRY and inheritance.
-  ---
+  
   
   ## Component
   Component type. Used for inheritance for custom class components.
-  
-  ---
+
   Details :
+  ---
   
   Components must have private method \_render, which returns string or [Tag](#tag).
-  ---
   
   Methods :
+  ---
   ### Component.render
   `def render ()`
   
   Renders component to screen. 
   
-  ---
+  
+  
   
 # JS
+# Functions
+ ## init_clisd
+ `async function init_clisd ()`
+ 
+ Initialize clisd framework and pyodide. Returns pyodide module. Check [pyodide docs](https://pyodide.org/en/stable/usage/api/js-api.html#js-api-pyodide) for more details.
+ 
+ ## runPython
+ `async function runPython (clisd, name)`
+ 
+ Runs python file via pyodide framework.
+ 
+ Arguments :
+ ---
+ * clisd : pyodide module - pyodide module returned bi init_clisd
+ * name : Strign - link to .py file
 
 # Example
 ```
