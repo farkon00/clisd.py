@@ -27,6 +27,8 @@ Done!
       * [Tag.render](#tagrender)
     * [Component](#component) 
       * [Component.render](#componentrender)
+    * [State](#state)
+      * [State.set](#stateset)
   * [JS](#js)
     * [init_clisd](#init_clisd)
     * [runPython](#runpython)
@@ -69,8 +71,25 @@ Done!
   
   Renders component to screen. 
   
+  ## State
+  Dynamic state for class components type.
   
+  Constructor arguments :
+  ---
+  * component : [Component](#component) - component to which this state belongs
+  * value : object - initial value of state
+  * auto_render=True - bool coresponding to auto rerendering component after state value changing
+
+  Properties :
+  ---
+  value : object - value of state, on change calls [set](#stateset)
   
+  Methods :
+  ---
+  ### State.set
+  `def set (value)`
+  
+  Sets value of state to `value`. Also can be used by setting State.value manually(`self.my_state.value = 1`).
   
 # JS
 # Functions
