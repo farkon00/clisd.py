@@ -33,6 +33,8 @@ Done!
       * [Event](#event)
         * [Event.apply](#eventaplly)
     * [Functions](#functions)
+      * [relative](#relative)
+      * [anchor](#anchor)
       * [render_page](#render_page)
       * [route](#route)
     
@@ -118,6 +120,24 @@ Done!
   * target : JS EventTarget - target, which will be used for addEventListener
   
 # Functions
+  ## relative
+  `def relative (link : str)`
+  
+  Converts relative link `link` to absolute link.
+  
+  Arguments :
+  ---
+  * link : str - relative link to be converted
+
+  ## anchor
+  `def anchor (id : str)`
+  
+  Converts id name to anchor link.
+  
+  Arguments :
+  ---
+  * id : str - id of element to which link will point
+
   ## render_page
   `def render_page(dom : Tag)`
   
