@@ -105,6 +105,11 @@ class Event:
     def apply(self, target):
         target.addEventListener(self.event, pyodide.create_proxy(self.action))
 
+def relative(link : str):
+    """Convert relative link to absolute"""
+
+    return f"#{document.URL.split('#')[1]}/{link}"
+
 def render_page(dom : Tag):
     """Renders dom to screen, change styles"""
     global _style_elem
