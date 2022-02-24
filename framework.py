@@ -110,6 +110,12 @@ def relative(link : str):
 
     return f"#{document.URL.split('#')[1]}/{link}"
 
+def anchor(id : str):
+    if id[0] == "#":
+        id = id[1:]
+
+    return f"#{document.URL.split('#')[1]}#{id}"
+
 def render_page(dom : Tag):
     """Renders dom to screen, change styles"""
     global _style_elem
