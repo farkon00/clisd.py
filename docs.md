@@ -127,7 +127,7 @@
   * dom : Tag - tag that will be displayed to screen
 
   ## route
-  `def route(route : dict)`
+  `def route (route : dict, filter=lambda x : x)`
   
   Routes link in `route` dictionary. Automatically calls [render_page](#render_page), when link changes. 
   
@@ -149,6 +149,15 @@
   website.com#/test : test,
   website.com#/test/about : about
   ```
+
+  Filter fucntion example :
+  ```
+  def filter_(code):
+    return div(
+        nav(),
+        code
+    )
+  ```
   
   Details :
   ---
@@ -157,6 +166,7 @@
   Arguments :
   ---
   * route : dict - dictionary of links and function components for that. **Carefully read description of function for structure of dictionary**
+  * filter : function - function, that adds template code to page, like navigation or footer.
   
   
 # JS
@@ -174,4 +184,4 @@
  Arguments :
  ---
  * clisd : pyodide module - pyodide module returned bi init_clisd
- * name : Strign - link to .py files
+ * name : String - link to .py file
