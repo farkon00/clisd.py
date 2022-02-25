@@ -145,7 +145,7 @@ In clisd.py pages splited into components, and pages are component also. There i
   Methods :
   ---
   ### State.set
-  `def set (value)`
+  `def set (self, value : object)`
   
   Sets value of state to `value`. Also can be used by setting State.value manually(`self.my_state.value = 1`).
   
@@ -197,7 +197,7 @@ In clisd.py pages splited into components, and pages are component also. There i
   * dom : Tag - tag that will be displayed to screen
 
   ## route
-  `def route (route : dict, filter=lambda x : x)`
+  `def route (route : dict[str : FunctionType], filter : FunctionType=lambda x : x)`
   
   Routes link in `route` dictionary. Automatically calls [render_page](#render_page), when link changes. 
   
