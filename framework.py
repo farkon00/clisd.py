@@ -132,7 +132,7 @@ def render_page(dom : Tag):
     document.head.appendChild(_style_elem)
     
 
-def route(route : dict):
+def route(route : dict, filter=lambda x : x):
     """Routes links in clisd.py"""
     def route_link(e, page=None, _route=route):
         route =_route
@@ -169,7 +169,7 @@ def route(route : dict):
         if isinstance(lvl, dict):
             route_link(None, page="/".join(url_parts[1:] if url_parts[1:] else "/"), _route=lvl)
         else:
-            render_page(lvl())
+            render_page(filter(lvl()))
 
     window.addEventListener("hashchange", pyodide.create_proxy(route_link))
     route_link(None)
