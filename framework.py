@@ -7,6 +7,39 @@ _style_elem = None
 
 styles = []
 
+# Lorem ipsum text
+LOREM = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta labore vel aperiam sapiente iste eligendi molestiae\
+     incidunt perferendis in minima dolorum, asperiores libero adipisci dolor quam ut ipsum ab est architecto at pariatur. Modi\
+     architecto consectetur harum rerum nesciunt suscipit ex temporibus aperiam dignissimos, alias repellendus facilis libero\
+     tempore fuga esse repudiandae cumque quidem nam! Dicta in, natus ipsam, magnam vel quam reiciendis ipsa culpa quibusdam nobis\
+     laudantium quis. Aspernatur suscipit esse deleniti repudiandae molestias provident amet animi magni quam soluta, dicta\
+     reprehenderit aut magnam vero nihil similique, quia obcaecati dolores consequuntur quidem quis error. Perferendis itaque, \
+    adipisci dolorum quis voluptate illum quam rerum molestiae, atque excepturi consectetur autem. Repudiandae quas ullam saepe \
+    fuga vitae at esse quibusdam tempore laboriosam expedita a magnam veritatis, ea quod repellendus corrupti maxime perspiciatis \
+    quo incidunt, placeat adipisci minus. Facere doloremque hic in. Corporis optio maiores tempore aut molestias provident \
+    voluptatum non, pariatur voluptatem eveniet dolore, et, blanditiis iure neque ducimus nam possimus minima magnam ipsum \
+    exercitationem itaque cum. Voluptatem, iure fugiat sunt odio quidem quod iusto fugit natus dolor praesentium ea dolorum aut \
+    corporis laboriosam ad quae sed blanditiis molestiae facere enim. Facere, porro assumenda perspiciatis maxime pariatur \
+    molestias impedit? Non, consequuntur blanditiis saepe quisquam fugit maxime? Incidunt velit maiores dolore impedit ab totam \
+    at perferendis, id, ad fugiat suscipit explicabo numquam atque animi natus doloremque repudiandae tenetur et repellat \
+    voluptas. Quis tempora iure deleniti aliquid incidunt sed, quos nulla eum sequi ratione, nobis ducimus labore ut libero \
+    dicta! Dolorem vero corporis illum officia et soluta rerum reiciendis optio explicabo obcaecati, nisi, cupiditate excepturi \
+    perspiciatis deleniti quam doloribus eaque? Suscipit quos dolores iure debitis ullam, mollitia, esse veniam amet odio, harum \
+    aliquam eveniet eligendi eaque maxime sapiente aut quasi. Natus quas quos dicta, dolorem nihil ex eveniet, odio laboriosam \
+    repellendus neque rerum temporibus laudantium autem voluptatum maxime aspernatur sunt, itaque labore illo suscipit nam. \
+    Accusantium explicabo odit, vel soluta dolore unde ipsa eius adipisci tempore iure dicta officia aspernatur ullam saepe \
+    eligendi neque, minus maiores consequatur debitis, esse numquam est delectus necessitatibus! Magnam quasi tempora consectetur \
+    suscipit voluptate ullam nulla quis ut facilis optio. Eos voluptates sit facere fuga maiores deleniti? Minus iusto ea \
+    accusantium officiis error, sit quia impedit ratione asperiores soluta harum adipisci libero temporibus molestias consectetur \
+    deserunt eos obcaecati nulla dignissimos, tempore excepturi? Eius totam, earum qui id culpa aperiam exercitationem laborum \
+    quidem aspernatur facere quasi, dignissimos, nemo quibusdam? Dignissimos qui et ex exercitationem pariatur officiis laborum \
+    ipsam cum natus dolorum nemo, doloremque porro consequatur rerum. Itaque officiis, labore ipsam facere repellendus praesentium \
+    earum voluptate reprehenderit commodi numquam, recusandae perferendis quam accusamus quia magnam corrupti quae qui sit \
+    dolores tempora! Dolore libero, exercitationem obcaecati rerum earum suscipit enim minus maiores debitis facere adipisci \
+    temporibus tempore quod nesciunt? Molestias reiciendis quae commodi ut praesentium. Numquam nesciunt magni et vero quaerat \
+    recusandae debitis blanditiis, incidunt obcaecati enim eaque laudantium perferendis delectus nobis itaque provident non \
+    excepturi odio expedita quia corporis impedit. Quod velit amet vitae rerum maxime tenetur fugiat neque, sit ea."
+
 class Tag:
     """HTML tag clisd.py object"""
     def __init__(self, name : str, *content, _class : str="", events=None, **attrs):
