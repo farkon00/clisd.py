@@ -5,7 +5,10 @@
     * [Components](#components)
       * [Functional components](#functional-components)
       * [Class components](#class-components)
-
+    * [Variables and costants](#variables-and-costants)
+      * [LOREM](#lorem)
+      * [styles](#styles)
+      * [_style_elem](#_style_elem)
     * [Types](#types)
       * [Tag](#tag)
         * [Tag.render](#tagrender)
@@ -70,6 +73,23 @@ In clisd.py pages splited into components, and pages are component also. There i
         p(self.state.value)
       )
   ```
+
+# Variables and costants
+  ## LOREM
+  Type : str
+
+  Constant of old text lorem ipsum. Used by web developers as placeholder.
+
+  ## styles
+  Type : list\[str\]
+
+  Array of styles from components. Clears every time when page rendered.
+
+  ## _style_elem
+  Type : JS HTMLElement(None before first render)
+
+  JS object for style element, that was added from [styles](#styles) list.
+
 
 # Types
   ## Tag
