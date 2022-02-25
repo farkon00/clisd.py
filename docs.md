@@ -2,6 +2,10 @@
 
 # Table of content
   * [Python](#python)
+    * [Components](#components)
+      * [Functional components](#functional-components)
+      * [Class components](#class-components)
+
     * [Types](#types)
       * [Tag](#tag)
         * [Tag.render](#tagrender)
@@ -22,6 +26,51 @@
     * [runPython](#runpython)
  
 # Python 
+# Components
+In clisd.py pages splited into components, and pages are component also. There is 2 types of components: fucntions and classes.
+
+## Functional components
+  Functional components are functions that return string of html code or Tag object. Compoentns can accept arguments or make requests to back-end themselves. Also functional components can`t use states, only way for using states is making functional components included in class component, so they will be rerendered every time state changes.
+
+  Simple example of components :
+  ```
+  def nav_link(name, link):
+    return li(a(name, href=link))
+
+  def nav():
+    styles.append(nav_styles) # Styles are big, so they are not included.
+
+    return div(
+      ul(
+        li(h1(a("Example page", href="#"), _class="logo")),
+        nav_link("About", "#about"),
+        nav_link("Test", "#about/test"),
+        _class="nav-list"
+      ),
+          _class="nav"
+      )
+  ```
+
+## Class components
+  Class components are classes, which are inherieted from [Component](#component) class and have _render private method. Main difference between fucntional and class components is states.
+
+  States created by using [State](#state) class. Example of state : `self.state = State(self, 0)`, so first argument is component itself and second is initial value. State value can be anything.
+
+  When state changes component automatically rerenderes itself. But if you don`t want that add auto_render argument to initialization of state.
+
+  Example of class component : 
+  ```
+  class ClassComp(Component):
+    def __init__(self):
+      self.state = State(self, 0)
+    
+    def _render(self):
+      return div(
+        Tag("button", "CLICK", events=(Event("click", lambda x : self.state.set(self.state.value + 1)),)),
+        p(self.state.value)
+      )
+  ```
+
 # Types
   ## Tag
   HTML tag type. 
