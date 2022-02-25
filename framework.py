@@ -1,4 +1,5 @@
 from js import document, window
+from types import FunctionType
 import pyodide
 
 global _style_elem
@@ -18,6 +19,7 @@ class Tag:
         if _class: self.attrs["class"] = _class
 
     def render(self, tag=None):
+        """Renders tag to html"""
         if not tag:
             tag = self
 
@@ -43,16 +45,18 @@ class Component(Tag):
     def __init__(self): pass
 
     def render(self):
+        """Renders component to html"""
         return super().render(tag=self._render())
 
 class State:
     """Dynamic state for clisd.py components"""
-    def __init__(self, component, value, auto_render=True):
+    def __init__(self, component : Component, value : object, auto_render : bool=True):
         self.component = component
         self._value = value
         self.auto_render = auto_render
 
-    def set(self, value):
+    def set(self, value : object):
+        """Sets value for state and renders component, if auto_render"""
         self._value = value
         if self.auto_render:
             elem = self.component.element
@@ -67,6 +71,17 @@ class State:
         self.set(value)
 
 
+class Event:
+    """Clisd.py event object"""
+    def __init__(self, event : str, action : FunctionType = lambda e: None):
+        self.event = event
+        self.action = action
+
+    def apply(self, target):
+        """Apllies event on target"""
+        target.addEventListener(self.event, pyodide.create_proxy(self.action))
+
+# Shortcuts for tags
 def div(*args, **kwargs): return Tag("div", *args, **kwargs)
 def p(*args, **kwargs): return Tag("p", *args, **kwargs)
 def pre(*args, **kwargs): return Tag("pre", *args, **kwargs)
@@ -95,16 +110,6 @@ def ul(*args, **kwargs): return Tag("ul", *args, **kwargs)
 def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
 
-
-class Event:
-    """Clisd.py event object"""
-    def __init__(self, event, action = lambda e: None):
-        self.event = event
-        self.action = action
-
-    def apply(self, target):
-        target.addEventListener(self.event, pyodide.create_proxy(self.action))
-
 def relative(link : str):
     """Convert relative link to absolute"""
 
@@ -120,8 +125,13 @@ def render_page(dom : Tag):
     """Renders dom to screen, change styles"""
     global _style_elem
 
-    document.body.innerHTML = ""
-    document.body.appendChild(dom.render())
+    if "render" in dir(dom):
+        body = dom.render()
+        document.body.innerHTML = ""
+        document.body.appendChild(body)
+    else:
+        document.body.innerHTML = dom
+    
 
     if not _style_elem:
         _style_elem = document.createElement("style")
@@ -132,9 +142,9 @@ def render_page(dom : Tag):
     document.head.appendChild(_style_elem)
     
 
-def route(route : dict, filter=lambda x : x):
+def route(route : dict[str : FunctionType], filter : FunctionType=lambda x : x):
     """Routes links in clisd.py"""
-    def route_link(e, page=None, _route=route):
+    def route_link(e=None, page : str=None, _route : dict[str : FunctionType]=route):
         route =_route
         if page:
             url = page
@@ -167,7 +177,7 @@ def route(route : dict, filter=lambda x : x):
             return render_page(p("Error 404 : Page not found"))
 
         if isinstance(lvl, dict):
-            route_link(None, page="/".join(url_parts[1:] if url_parts[1:] else "/"), _route=lvl)
+            route_link(page="/".join(url_parts[1:] if url_parts[1:] else "/"), _route=lvl)
         else:
             render_page(filter(lvl()))
 
