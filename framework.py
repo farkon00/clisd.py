@@ -97,7 +97,7 @@ class State:
         if self.auto_render:
             elem = self.component.element
             elem.parentNode.replaceChild(self.component.render(), elem)
-            styles[0:] = []
+            styles.clear()
 
     @property
     def value(self):
@@ -179,7 +179,7 @@ def render_page(dom : Tag):
         _style_elem = document.createElement("style")
 
     _style_elem.innerHTML = "\n".join(styles)
-    styles[0:] = []
+    styles.clear()
 
     document.head.appendChild(_style_elem)
     
