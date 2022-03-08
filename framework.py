@@ -53,14 +53,14 @@ class Tag:
 
     def render(self, tag=None):
         """Renders tag to html"""
-        if not tag:
+        if tag is None:
             tag = self
 
         self.element = document.createElement(tag.name)
 
         # Sets atributes for element
         for i, j in tag.attrs.items():
-            self.element.setAttribute(str(i), str(j))
+            self.element.setAttribute(i, str(j))
 
         # Applies events to element
         for i in tag.events:
@@ -101,6 +101,7 @@ class State:
 
     @property
     def value(self):
+        """Value of state"""
         return self._value
     @value.setter
     def value(self, value):
@@ -175,7 +176,7 @@ def render_page(dom : Tag):
         document.body.innerHTML = dom
     
     # Adds styles to page
-    if not _style_elem:
+    if _style_elem is None:
         _style_elem = document.createElement("style")
 
     _style_elem.innerHTML = "\n".join(styles)
@@ -219,7 +220,7 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
 
         lvl = route.get(url_parts[0], None)
 
-        if not lvl and None not in route:
+        if lvl is None and None not in route:
             return render_page(p("Error 404 : Page not found"))
 
         if isinstance(lvl, dict):
