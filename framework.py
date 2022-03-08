@@ -187,7 +187,9 @@ def render_page(dom : Tag):
 
 def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x):
     """Routes links in clisd.py"""
-    def route_link(e=None, page : str=None, _route : dict[str : FunctionType]=route):
+    last_link = None
+
+    def route_link(e=None, page : str = None, _route : dict[str : FunctionType] = route):
         route = _route
 
         # Finds page to route in url
@@ -198,6 +200,17 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
                 url = document.URL.split("#")[1]
             except IndexError:
                 url = "/"
+
+        if url == last_link:
+            # Anchor links 
+            anchor = "#".join(document.URL.split("#")[2:])
+
+            anchor_elem = document.getElementById(anchor)
+            
+            if anchor_elem:
+                anchor_elem.scrollIntoView(True)
+
+            return None
 
         # Deletes slashes before and after url 
         if url:
@@ -220,13 +233,23 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
 
         lvl = route.get(url_parts[0], None)
 
+        # Page not found
         if lvl is None and None not in route:
             return render_page(p("Error 404 : Page not found"))
 
+        # Renders page
         if isinstance(lvl, dict):
             route_link(page="/".join(url_parts[1:] if url_parts[1:] else "/"), _route=lvl)
         else:
             render_page(filter(lvl()))
+
+        # Anchor links 
+        anchor = "#".join(document.URL.split("#")[2:])
+
+        anchor_elem = document.getElementById(anchor)
+        
+        if anchor_elem:
+            anchor_elem.scrollIntoView(True)
 
     window.addEventListener("hashchange", pyodide.create_proxy(route_link))
     route_link(None)
