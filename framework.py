@@ -166,13 +166,15 @@ def render_page(dom : Tag):
     global _style_elem
 
     if "render" in dir(dom):
+        # Renders Tag or Component
         body = dom.render()
         document.body.innerHTML = ""
         document.body.appendChild(body)
     else:
+        # Renders HTML
         document.body.innerHTML = dom
     
-
+    # Adds styles to page
     if not _style_elem:
         _style_elem = document.createElement("style")
 
@@ -186,6 +188,8 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
     """Routes links in clisd.py"""
     def route_link(e=None, page : str=None, _route : dict[str : FunctionType]=route):
         route = _route
+
+        # Finds page to route in url
         if page:
             url = page
         else:
@@ -194,6 +198,7 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
             except IndexError:
                 url = "/"
 
+        # Deletes slashes before and after url 
         if url:
             if url[0] == "/" or url[0] == "\\":
                 url = url[1:]
@@ -201,6 +206,7 @@ def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x
             if url[-1] == "/" or url[-1] == "\\":
                 url = url[:-1]
 
+        # Splits url to parts(e.g. example/clisd split into ["example", "clisd"])
         url_parts = []
         for i in url.split("/"):
             if "\\" not in i:
