@@ -8,12 +8,12 @@ _style_elem = None
 styles = []
 
 # Lorem ipsum text
-LOREM = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta labore vel aperiam sapiente iste eligendi molestiae\
-     incidunt perferendis in minima dolorum, asperiores libero adipisci dolor quam ut ipsum ab est architecto at pariatur. Modi\
-     architecto consectetur harum rerum nesciunt suscipit ex temporibus aperiam dignissimos, alias repellendus facilis libero\
-     tempore fuga esse repudiandae cumque quidem nam! Dicta in, natus ipsam, magnam vel quam reiciendis ipsa culpa quibusdam nobis\
-     laudantium quis. Aspernatur suscipit esse deleniti repudiandae molestias provident amet animi magni quam soluta, dicta\
-     reprehenderit aut magnam vero nihil similique, quia obcaecati dolores consequuntur quidem quis error. Perferendis itaque, \
+LOREM = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta labore vel aperiam sapiente iste eligendi molestiae \
+    incidunt perferendis in minima dolorum, asperiores libero adipisci dolor quam ut ipsum ab est architecto at pariatur. Modi \
+    architecto consectetur harum rerum nesciunt suscipit ex temporibus aperiam dignissimos, alias repellendus facilis libero \
+    tempore fuga esse repudiandae cumque quidem nam! Dicta in, natus ipsam, magnam vel quam reiciendis ipsa culpa quibusdam nobis \
+    laudantium quis. Aspernatur suscipit esse deleniti repudiandae molestias provident amet animi magni quam soluta, dicta \
+    reprehenderit aut magnam vero nihil similique, quia obcaecati dolores consequuntur quidem quis error. Perferendis itaque, \
     adipisci dolorum quis voluptate illum quam rerum molestiae, atque excepturi consectetur autem. Repudiandae quas ullam saepe \
     fuga vitae at esse quibusdam tempore laboriosam expedita a magnam veritatis, ea quod repellendus corrupti maxime perspiciatis \
     quo incidunt, placeat adipisci minus. Facere doloremque hic in. Corporis optio maiores tempore aut molestias provident \
@@ -42,7 +42,7 @@ LOREM = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta labore 
 
 class Tag:
     """HTML tag clisd.py object"""
-    def __init__(self, name : str, *content, _class : str="", events=None, **attrs):
+    def __init__(self, name : str, *content, _class : str = "", events=None, **attrs):
         self.name = name
         self.content = content
 
@@ -58,12 +58,15 @@ class Tag:
 
         self.element = document.createElement(tag.name)
 
+        # Sets atributes for element
         for i, j in tag.attrs.items():
             self.element.setAttribute(str(i), str(j))
 
+        # Applies events to element
         for i in tag.events:
             i.apply(self.element)
 
+        # Adds content to element
         for i in tag.content:
             if isinstance(i, Tag):
                 self.element.appendChild(i.render())
@@ -83,7 +86,7 @@ class Component(Tag):
 
 class State:
     """Dynamic state for clisd.py components"""
-    def __init__(self, component : Component, value : object, auto_render : bool=True):
+    def __init__(self, component : Component, value : object, auto_render : bool = True):
         self.component = component
         self._value = value
         self.auto_render = auto_render
@@ -101,12 +104,13 @@ class State:
         return self._value
     @value.setter
     def value(self, value):
+        """Sets value for state and renders component, if auto_render"""
         self.set(value)
 
 
 class Event:
     """Clisd.py event object"""
-    def __init__(self, event : str, action : FunctionType = lambda e: None):
+    def __init__(self, event : str, action : FunctionType = lambda e : None):
         self.event = event
         self.action = action
 
@@ -149,6 +153,9 @@ def relative(link : str):
     return f"#{document.URL.split('#')[1]}/{link}"
 
 def anchor(id : str):
+    """Convert id to anchor link(Anchor links is not supported yet)"""
+    # TODO add support for anchor links
+
     if id[0] == "#":
         id = id[1:]
 
@@ -175,10 +182,10 @@ def render_page(dom : Tag):
     document.head.appendChild(_style_elem)
     
 
-def route(route : dict[str : FunctionType], filter : FunctionType=lambda x : x):
+def route(route : dict[str : FunctionType], filter : FunctionType = lambda x : x):
     """Routes links in clisd.py"""
     def route_link(e=None, page : str=None, _route : dict[str : FunctionType]=route):
-        route =_route
+        route = _route
         if page:
             url = page
         else:
