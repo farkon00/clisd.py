@@ -115,7 +115,7 @@ class Event:
         self.event = event
         self.action = action
 
-    def apply(self, target):
+    def apply(self, target : Tag):
         """Apllies event on target"""
         target.addEventListener(self.event, pyodide.create_proxy(self.action))
 
