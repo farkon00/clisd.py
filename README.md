@@ -11,7 +11,7 @@ Roadmap :
 ---
 # Getting Started
 1. Create html file and load script from CDN https://cdn.jsdelivr.net/gh/farkon00/clisd.py/clisd.js
-2. Set up your local server(author uses Live Server for VS Code).
+2. Set up your local server(author uses [Live Server for VS Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)).
 3. Create main.py or other .py file.
 4. Create code as showed in template.js.
 5. Write code in your .py file.
