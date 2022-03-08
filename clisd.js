@@ -18,7 +18,7 @@ async function init_clisd() {
         indexURL : "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/"
     });
 
-    await runPython(pyodide, "https://cdn.jsdelivr.net/gh/farkon00/clisd.py/framework.py");
+    await runPython(pyodide, "/framework.py");
 
     return pyodide;
 }
