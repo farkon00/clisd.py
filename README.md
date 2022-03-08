@@ -40,6 +40,7 @@ Done!
       * [Event](#event)
         * [Event.apply](#eventaplly)
     * [Functions](#functions)
+      * [Tag fucntions](#tag-fucntions)
       * [relative](#relative)
       * [anchor](#anchor)
       * [render_page](#render_page)
@@ -189,6 +190,15 @@ In clisd.py pages splited into components, and pages are component also. There i
   * target : JS EventTarget - target, which will be used for addEventListener
   
 # Functions
+  ## Tag fucntions
+  `def <tag>(*args, **kwargs)`
+
+  For easier and more beatiful code there are shortcut functions for the most used tags. This functions returns [Tag](#tag) obejct. For first argument goes tag name and then unpacked args and kwargs.
+
+  Tags that have shortcuts : div, p, pre, span, img, input, button, textarea, table, tbody, th, tr, td, a, h1, h2, h3, h4, h5, h6, strong, em, i, br, ul, ol, li
+
+  Example : `a("About", href="#about")`
+
   ## relative
   `def relative (link : str)`
   
@@ -275,52 +285,3 @@ In clisd.py pages splited into components, and pages are component also. There i
  ---
  * clisd : pyodide module - pyodide module returned bi init_clisd
  * name : String - link to .py file
-
-# Example
-```
-def cute_component():
-    styles.append(
-    """
-    #comp_p {
-        font-size : 60px;
-    }
-    """
-    )
-
-    return div(
-        p("Component example : ", id="comp_p"),
-        img(width="20%", height="20%", src="https://bit.ly/3gXBe1f") # Image of cat
-    )
-
-def main_page():
-    return div(
-            p("Nice start for the framework!", _class="content"),
-            cute_component(),
-            a("About", href="#about")
-    )
-
-class ClassComp(Component):
-    def __init__(self):
-        self.state = State(self, 0)
-    
-    def _render(self):
-        return div(
-            Tag("button", "CLICK", events=(Event("click", lambda x : self.state.set(self.state.value + 1)),)),
-            p(self.state.value)
-        )
-
-def about_page():
-    return div(
-        a("Main", href="#"),
-        p("We don`t know who we are"),
-        ClassComp()
-    )
-
-def main():
-    route({
-        "about" : about_page,
-        "" : main_page
-    })
-
-main()
-```

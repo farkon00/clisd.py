@@ -19,6 +19,7 @@
       * [Event](#event)
         * [Event.apply](#eventaplly)
     * [Functions](#functions)
+      * [Tag fucntions](#tag-fucntions)
       * [relative](#relative)
       * [anchor](#anchor)
       * [render_page](#render_page)
@@ -168,6 +169,15 @@ In clisd.py pages splited into components, and pages are component also. There i
   * target : JS EventTarget - target, which will be used for addEventListener
   
 # Functions
+  ## Tag fucntions
+  `def <tag>(*args, **kwargs)`
+
+  For easier and more beatiful code there are shortcut functions for the most used tags. This functions returns [Tag](#tag) obejct. For first argument goes tag name and then unpacked args and kwargs.
+
+  Tags that have shortcuts : div, p, pre, span, img, input, button, textarea, table, tbody, th, tr, td, a, h1, h2, h3, h4, h5, h6, strong, em, i, br, ul, ol, li
+
+  Example : `a("About", href="#about")`
+
   ## relative
   `def relative (link : str)`
   
