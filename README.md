@@ -5,7 +5,7 @@ In plans this framework will be able to compete with React, Vue.js, Angular etc.
 
 Roadmap : 
 * [x] Develop good base for framework.
-* [ ] Add more control of the page and interactive pages to framework.(WIP)
+* [x] Add more control of the page and interactive pages to framework.(WIP)
 * [ ] Integration with Django for easy development for front and back end.
 * [ ] Development of new full-stack framework. Which will use this framework as front-end part.
 ---
