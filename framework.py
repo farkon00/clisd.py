@@ -155,7 +155,6 @@ def relative(link : str):
 
 def anchor(id : str):
     """Convert id to anchor link(Anchor links is not supported yet)"""
-    # TODO add support for anchor links
 
     if id[0] == "#":
         id = id[1:]
