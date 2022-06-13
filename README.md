@@ -283,5 +283,5 @@ In clisd.py pages splited into components, and pages are component also. There i
  
  Arguments :
  ---
- * clisd : pyodide module - pyodide module returned bi init_clisd
+ * clisd : pyodide module - pyodide module returned by init_clisd
  * name : String - link to .py file
