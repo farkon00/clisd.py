@@ -6,7 +6,9 @@ Clisd is UI framework with client side rendering and SPA for python. It uses WAS
 
 Roadmap : 
 * [x] Develop good base for framework.
-* [x] Add more control of the page and interactive pages to framework.(WIP)
+* [x] Add more control of the page and interactive pages to framework.
+
+May be :
 * [ ] Integration with Django for easy development for front and back end.
 * [ ] Development of new full-stack framework. Which will use this framework as front-end part.
 ---
