@@ -180,7 +180,7 @@ In clisd.py pages splited into components, and pages are component also. There i
 
   Methods :
   ---
-  ### Event.aplly
+  ### Event.apply
   `def apply (target)`
   
   Applies an event for `target`.
