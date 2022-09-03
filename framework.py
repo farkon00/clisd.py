@@ -1,5 +1,7 @@
+from typing import Any
 from js import document, window
 from types import FunctionType
+from typing import Union, get_origin, get_args
 import pyodide
 
 global _style_elem
@@ -107,6 +109,55 @@ class State:
     def value(self, value):
         """Sets value for state and renders component, if auto_render"""
         self.set(value)
+
+    @staticmethod
+    def _get_states_of_component(cls) -> dict[str, Any]:
+        """
+        Gets all annotations from component
+        """
+        states = {}
+        for state, typ in cls.__annotations__.items():
+            try:
+                states[state] = getattr(cls, state)
+            except AttributeError:
+                if get_origin(typ) is Union and type(None) in get_args(typ):
+                    states[typ] = None
+                else:
+                    raise AttributeError("State must either have type of typing.Optional or have a default value")
+
+        return states
+
+    @classmethod
+    def component(self, cls): # This naming breaks one convention to keep another one
+        """
+        Automatically creates states with auto-update enabled for all annotations.
+        
+        Examines PEP 526 __annotations__ to determine fields.
+
+        @State.component\ 
+        class Counter(Component):
+            # Create state count
+            count: int
+
+            def _render(self):
+                return p(self.count.value)
+        """
+
+        if not issubclass(cls, Component):
+            raise TypeError("Can't apply State.component on non-component(may be you forgot to inheirate Component)")
+        
+        states = self._get_states_of_component(cls)
+        initter = getattr(cls, "__init__", None)
+
+        def init(self, *args, **kwargs):
+            for name, value in states.items():
+                setattr(self, name, State(self, value))
+            if initter is not None:
+                initter(self, *args, **kwargs)
+
+        cls.__init__ = init
+
+        return cls
 
 
 class Event:
