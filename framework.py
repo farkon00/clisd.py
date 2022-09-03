@@ -126,7 +126,6 @@ def pre(*args, **kwargs): return Tag("pre", *args, **kwargs)
 def span(*args, **kwargs): return Tag("span", *args, **kwargs)
 def img(**kwargs): return Tag("img", "", **kwargs)
 def input(**kwargs): return Tag("input", "", **kwargs)
-def button(*args, **kwargs): return Tag("button", *args, **kwargs)
 def textarea(*args, **kwargs): return Tag("textarea", *args, **kwargs)
 def table(*args, **kwargs): return Tag("table", *args, **kwargs)
 def tbody(*args, **kwargs): return Tag("tbody", *args, **kwargs)
@@ -147,6 +146,16 @@ def br(**kwargs): return Tag("br", "", **kwargs)
 def ul(*args, **kwargs): return Tag("ul", *args, **kwargs)
 def ol(*args, **kwargs): return Tag("ol", *args, **kwargs)
 def li(*args, **kwargs): return Tag("li", *args, **kwargs)
+def button(*args, onclick: FunctionType = None, **kwargs): 
+    if onclick:
+        if "events" in kwargs:
+            events = kwargs["events"]
+            del kwargs["events"]
+            return Tag("button", *args, events=tuple(events)+(Event("click", onclick),), **kwargs)
+        else:
+            return Tag("button", *args, events=(Event("click", onclick),), **kwargs)
+    else:
+        return Tag("button", *args, **kwargs)
 
 def relative(link : str):
     """Convert relative link to absolute"""
