@@ -3,10 +3,6 @@ js.py
 # Testing file
 main.py
 
-# How many times not CDN links was commited?
-template.html
-clisd.js
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

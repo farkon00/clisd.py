@@ -96,7 +96,7 @@ class State:
     def set(self, value : object):
         """Sets value for state and renders component, if auto_render"""
         self._value = value
-        if self.auto_render:
+        if self.auto_render and hasattr(self.component, "element"):
             elem = self.component.element
             elem.parentNode.replaceChild(self.component.render(), elem)
             styles.clear()
