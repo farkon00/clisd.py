@@ -17,7 +17,7 @@
       * [State](#state)
         * [State.set](#stateset)
       * [Event](#event)
-        * [Event.apply](#eventaplly)
+        * [Event.apply](#eventapply)
     * [Functions](#functions)
       * [Tag fucntions](#tag-fucntions)
       * [relative](#relative)
@@ -159,7 +159,7 @@ In clisd.py pages splited into components, and pages are component also. There i
 
   Methods :
   ---
-  ### Event.aplly
+  ### Event.apply
   `def apply (target)`
   
   Applies an event for `target`.
